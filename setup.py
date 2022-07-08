@@ -8,7 +8,7 @@ setup(
     license='MIT',
     packages=find_packages(),
     description='PyQt Database (mainly SQLite currently) basic use example',
-    url='https://github.com/yjg30737/pyqt_database_example.git',
+    url='https://github.com/yjg30737/pyqt-database-example.git',
     install_requires=[
         'PyQt5>=5.8',
     ]
