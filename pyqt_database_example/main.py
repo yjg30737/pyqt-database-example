@@ -1,6 +1,6 @@
-from PyQt5.QtSql import QSqlTableModel, QSqlDatabase
+from PyQt5.QtSql import QSqlTableModel, QSqlDatabase, QSqlQuery
 from PyQt5.QtWidgets import QStyledItemDelegate, QMainWindow, QLabel, QTableView, QAbstractItemView, QPushButton, \
-    QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox, QApplication
+    QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox
 from PyQt5.QtCore import Qt
 
 
@@ -97,7 +97,6 @@ def createConnection():
         return False
     return True
 
-init_database = '''
 def initDatabase():
     table = 'contacts'
 
@@ -146,4 +145,3 @@ def initDatabase():
         insertDataQuery.addBindValue(job)
         insertDataQuery.addBindValue(email)
         insertDataQuery.exec()
-'''
