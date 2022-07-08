@@ -11,7 +11,7 @@ PyQt Database (mainly SQLite) basic use example
 Code Sample
 ```python
 from PyQt5.QtWidgets import QApplication
-from pyqt_database_example import createConnection, QtDatabaseExample
+from pyqt_database_example import createConnection, initDatabase, QtDatabaseExample
 
 if __name__ == "__main__":
     import sys
