@@ -20,7 +20,7 @@ if __name__ == "__main__":
     if not createConnection():
         sys.exit(1)
     initTable() # Create table. After create table, you don't need to do it unless you want to make the table to empty.
-    addSample() # Add sample records (Joe, Lara, David, Jane. See result image below.)
+    # addSample() Add sample records (Joe, Lara, David, Jane. See result image below.)
     ex = QtDatabaseExample()
     ex.show()
     sys.exit(app.exec_())
