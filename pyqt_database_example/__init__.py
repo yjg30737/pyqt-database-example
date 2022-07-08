@@ -1,1 +1,1 @@
-from pyqt_database_example.main import QtDatabaseExample, createConnection, initDatabase
+from pyqt_database_example.main import QtDatabaseExample, createConnection, initTable, addSample

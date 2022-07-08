@@ -97,14 +97,14 @@ def createConnection():
         return False
     return True
 
-def initDatabase():
+def initTable():
     table = 'contacts'
 
-    clearTableQuery = QSqlQuery()
-    clearTableQuery.prepare(
-        f'DELETE FROM {table}'
+    dropTableQuery = QSqlQuery()
+    dropTableQuery.prepare(
+        f'DROP TABLE {table}'
     )
-    clearTableQuery.exec()
+    dropTableQuery.exec()
 
     createTableQuery = QSqlQuery()
     createTableQuery.prepare(
@@ -118,6 +118,9 @@ def initDatabase():
         """
     )
     createTableQuery.exec()
+
+def addSample():
+    table = 'contacts'
 
     insertDataQuery = QSqlQuery()
     insertDataQuery.prepare(
