@@ -5,8 +5,7 @@ PyQt Database (mainly SQLite) basic use example
 * PyQt5 >= 5.8
 
 ## Setup
-`python -m pip install git+https://github.com/yjg30737/pyqt-database-examp
-le.git --upgrade`
+`python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
 
 ## Example
 Code Sample
