@@ -30,6 +30,10 @@ Result
 
 ![image](https://user-images.githubusercontent.com/55078043/177899335-92eaaa55-62e6-4072-ad35-f22af6a53ea3.png)
 
+Add button literally adds new empty record.
+
+Delete button deletes selected row. (Only one row can be selected currently)
+
 ## See Also
 
 * <a href="https://realpython.com/python-pyqt-database/#reader-comments">Handling SQL Databases With PyQt: The Basics</a> - I made this thanks to this article.
