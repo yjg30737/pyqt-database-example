@@ -19,12 +19,16 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     if not createConnection():
         sys.exit(1)
-    initTable() # Create table
-    addSample() # Add sample records
+    initTable() # Create table. After create table, you don't need to do it unless you want to make the table to empty.
+    addSample() # Add sample records (Joe, Lara, David, Jane. See result image below.)
     ex = QtDatabaseExample()
     ex.show()
     sys.exit(app.exec_())
 ```
+
+![image](https://user-images.githubusercontent.com/55078043/177900006-31577341-84f3-4d87-bfff-36765fc3334c.png)
+
+If you execute the script, "contacts.sqlite" SQLite database file will be made.
 
 Result
 
