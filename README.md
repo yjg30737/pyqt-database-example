@@ -30,6 +30,8 @@ Result
 
 ![image](https://user-images.githubusercontent.com/55078043/177899335-92eaaa55-62e6-4072-ad35-f22af6a53ea3.png)
 
+'contacts' is table's name.
+
 Add button literally adds new empty record.
 
 Delete button deletes selected row. (Only one row can be selected currently)
