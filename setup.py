@@ -10,7 +10,7 @@ setup(
     description='PyQt database (mainly SQLite currently) basic use example',
     url='https://github.com/yjg30737/pyqt-database-example.git',
     install_requires=[
-        'PyQt5>=5.8',
+        'PyQt5>=5.12',
         'pyqt-instant-search-bar'
     ]
 )
