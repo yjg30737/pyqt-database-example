@@ -2,7 +2,9 @@
 PyQt database (SQLite) basic use example
 
 ## Requirements
-* PyQt5 >= 5.12 - Because one of QSortFilterProxyModel's function(setFilterRegularExpression) requires at least 5.12. This is indeed very convinient function so you don't have to worry.
+* PyQt5 >= 5.12
+
+Because one of QSortFilterProxyModel's function(setFilterRegularExpression) requires at least 5.12. This is indeed very convinient function so you don't have to worry.
 
 ## Setup
 `python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
