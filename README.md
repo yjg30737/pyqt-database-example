@@ -1,5 +1,5 @@
 # pyqt-database-example
-PyQt Database (SQLite) basic use example
+PyQt database (SQLite) basic use example
 
 ## Requirements
 * PyQt5 >= 5.8
