@@ -35,13 +35,24 @@ If you execute the script, "contacts.sqlite" SQLite database file will be made.
 
 Result
 
-![image](https://user-images.githubusercontent.com/55078043/177899335-92eaaa55-62e6-4072-ad35-f22af6a53ea3.png)
+
+![image](https://user-images.githubusercontent.com/55078043/183241774-786ad283-2461-4ef7-8b7e-f3c27c25ae92.png)
 
 'contacts' is table's name.
+
+You can search the text with search bar. (instant search)
+
+You can also set the column to search with combobox which is placed right next to search bar.
 
 Add button literally adds new empty record.
 
 Delete button deletes selected row. (Only one row can be selected currently)
+
+### Search bar example
+
+Let's set the column to search as "Name" and search the text "David".
+
+![image](https://user-images.githubusercontent.com/55078043/183241795-5cb1a0cc-a551-4f0e-add7-f01ae7e7085e.png)
 
 ## See Also
 
