@@ -11,6 +11,6 @@ setup(
     url='https://github.com/yjg30737/pyqt-database-example.git',
     install_requires=[
         'PyQt5>=5.8',
-        ''
+        'pyqt-instant-search-bar'
     ]
 )
