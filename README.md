@@ -50,7 +50,7 @@ Delete button deletes selected row. (Only one row can be selected currently)
 
 ### Search bar example
 
-Let's set the column to search as "Name" and search the text "David".
+Let's set the column to search as "Name" and search the text "Dav".
 
 ![image](https://user-images.githubusercontent.com/55078043/183241795-5cb1a0cc-a551-4f0e-add7-f01ae7e7085e.png)
 
