@@ -7,6 +7,9 @@ PyQt Database (SQLite) basic use example
 ## Setup
 `python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
 
+## Included Packages
+* <a href="https://github.com/yjg30737/pyqt-instant-search-bar.git">pyqt-instant-search-bar</a>
+
 ## Example
 Code Sample
 ```python
