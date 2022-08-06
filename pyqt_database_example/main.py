@@ -1,14 +1,29 @@
 from PyQt5.QtSql import QSqlTableModel, QSqlDatabase, QSqlQuery
 from PyQt5.QtWidgets import QStyledItemDelegate, QMainWindow, QLabel, QTableView, QAbstractItemView, QPushButton, \
-    QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox
-from PyQt5.QtCore import Qt
+    QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox, QComboBox
+from PyQt5.QtCore import Qt, QSortFilterProxyModel, QModelIndex, QRegExp
+from pyqt_instant_search_bar import InstantSearchBar
 
+
+# for search feature
+class FilterProxyModel(QSortFilterProxyModel):
+    def __init__(self):
+        super().__init__()
+        self.__searchedText = ''
+
+    @property
+    def searchedText(self):
+        return self.__searchedText
+
+    @searchedText.setter
+    def searchedText(self, value):
+        self.__searchedText = value
+        self.invalidateFilter()
 
 class AlignDelegate(QStyledItemDelegate):
     def initStyleOption(self, option, index):
         super().initStyleOption(option, index)
         option.displayAlignment = Qt.AlignCenter
-
 
 class QtDatabaseExample(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -24,21 +39,23 @@ class QtDatabaseExample(QMainWindow):
         # label
         lbl = QLabel(tableName)
 
+        columnNames = ['ID', 'Name', 'Job', 'Email']
+
         # Database table
         # Set up the model
-        self.__model = QSqlTableModel(self)
-        self.__model.setTable(tableName)
-        self.__model.setEditStrategy(QSqlTableModel.OnFieldChange)
-        self.__model.setHeaderData(0, Qt.Horizontal, "ID")
-        self.__model.setHeaderData(1, Qt.Horizontal, "Name")
-        self.__model.setHeaderData(2, Qt.Horizontal, "Job")
-        self.__model.setHeaderData(3, Qt.Horizontal, "Email")
-        self.__model.select()
-        # self.__model.installEventFilter(self)
+        self.__tableModel = QSqlTableModel(self)
+        self.__tableModel.setTable(tableName)
+        self.__tableModel.setEditStrategy(QSqlTableModel.OnFieldChange)
+        for i in range(len(columnNames)):
+            self.__tableModel.setHeaderData(i, Qt.Horizontal, columnNames[i])
+        self.__tableModel.select()
+
+        self.__proxyModel = FilterProxyModel()
+        self.__proxyModel.setSourceModel(self.__tableModel)
 
         # Set up the view
         self.__view = QTableView()
-        self.__view.setModel(self.__model)
+        self.__view.setModel(self.__tableModel)
         delegate = AlignDelegate()
         self.__view.setItemDelegateForColumn(0, delegate)
         self.__view.setItemDelegateForColumn(1, delegate)
@@ -47,6 +64,7 @@ class QtDatabaseExample(QMainWindow):
         self.__view.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.__view.resizeColumnsToContents()
         self.__view.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.__view.setModel(self.__proxyModel)
 
         # add/delete buttons
         addBtn = QPushButton('Add')
@@ -54,9 +72,21 @@ class QtDatabaseExample(QMainWindow):
         delBtn = QPushButton('Delete')
         delBtn.clicked.connect(self.__delete)
 
+        searchBar = InstantSearchBar()
+        searchBar.setPlaceHolder('Search...')
+        searchBar.searched.connect(self.__showResult)
+
+        items = ['All'] + columnNames
+
+        self.__comboBox = QComboBox()
+        for i in range(len(items)):
+            self.__comboBox.addItem(items[i])
+
         lay = QHBoxLayout()
         lay.addWidget(lbl)
         lay.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.MinimumExpanding))
+        lay.addWidget(searchBar)
+        lay.addWidget(self.__comboBox)
         lay.addWidget(addBtn)
         lay.addWidget(delBtn)
         lay.setContentsMargins(0, 0, 0, 0)
@@ -73,17 +103,26 @@ class QtDatabaseExample(QMainWindow):
 
         self.setCentralWidget(mainWidget)
 
+        self.__showResult('')
+
     def __add(self):
-        r = self.__model.record()
+        r = self.__tableModel.record()
         r.setValue("name", '')
         r.setValue("job", '')
         r.setValue("email", '')
-        self.__model.insertRecord(-1, r)
-        self.__model.select()
+        self.__tableModel.insertRecord(-1, r)
+        self.__tableModel.select()
 
     def __delete(self):
-        self.__model.removeRow(self.__view.currentIndex().row())
-        self.__model.select()
+        self.__tableModel.removeRow(self.__view.currentIndex().row())
+        self.__tableModel.select()
+
+    def __showResult(self, text):
+        # index -1 will be read from all columns
+        # otherwise it will be read the current column number indicated by combobox
+        self.__proxyModel.setFilterKeyColumn(self.__comboBox.currentIndex()-1)
+        # regular expression can be used
+        self.__proxyModel.setFilterRegularExpression(text)
 
 def createConnection():
     con = QSqlDatabase.addDatabase("QSQLITE")
