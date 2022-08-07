@@ -55,19 +55,17 @@ class QtDatabaseExample(QMainWindow):
 
         # Set up the view
         self.__view = QTableView()
-        self.__view.setModel(self.__tableModel)
+        self.__view.setModel(self.__proxyModel)
+
+        # align to center
         delegate = AlignDelegate()
-        self.__view.setItemDelegateForColumn(0, delegate)
-        self.__view.setItemDelegateForColumn(1, delegate)
-        self.__view.setItemDelegateForColumn(2, delegate)
-        self.__view.setItemDelegateForColumn(3, delegate)
-        self.__view.setItemDelegateForColumn(4, delegate)
-        self.__view.setItemDelegateForColumn(5, delegate)
-        self.__view.setItemDelegateForColumn(6, delegate)
+        for i in range(self.__tableModel.columnCount()):
+            self.__view.setItemDelegateForColumn(i, delegate)
+
+        # set selection/resize policy
         self.__view.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.__view.resizeColumnsToContents()
         self.__view.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.__view.setModel(self.__proxyModel)
 
         # sort (ascending order by default)
         self.__view.setSortingEnabled(True)
