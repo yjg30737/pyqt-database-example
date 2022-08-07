@@ -69,6 +69,10 @@ class QtDatabaseExample(QMainWindow):
         self.__view.setSelectionMode(QAbstractItemView.SingleSelection)
         self.__view.setModel(self.__proxyModel)
 
+        # sort (ascending order by default)
+        self.__view.setSortingEnabled(True)
+        self.__view.sortByColumn(0, Qt.AscendingOrder)
+
         # add/delete buttons
         addBtn = QPushButton('Add')
         addBtn.clicked.connect(self.__add)
