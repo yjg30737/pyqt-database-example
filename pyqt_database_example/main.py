@@ -37,9 +37,9 @@ class QtDatabaseExample(QMainWindow):
         tableName = "contacts"
 
         # label
-        lbl = QLabel(tableName)
+        lbl = QLabel(tableName.capitalize())
 
-        columnNames = ['ID', 'Name', 'Job', 'Email']
+        columnNames = ['ID', 'Name', 'Job', 'Email', 'City Escape', 'Wild Canyon', 'Prison Lane']
 
         # Database table
         # Set up the model
@@ -61,6 +61,9 @@ class QtDatabaseExample(QMainWindow):
         self.__view.setItemDelegateForColumn(1, delegate)
         self.__view.setItemDelegateForColumn(2, delegate)
         self.__view.setItemDelegateForColumn(3, delegate)
+        self.__view.setItemDelegateForColumn(4, delegate)
+        self.__view.setItemDelegateForColumn(5, delegate)
+        self.__view.setItemDelegateForColumn(6, delegate)
         self.__view.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.__view.resizeColumnsToContents()
         self.__view.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -152,7 +155,10 @@ def initTable():
             id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
             name VARCHAR(40) NOT NULL,
             job VARCHAR(50),
-            email VARCHAR(40) NOT NULL
+            email VARCHAR(40) NOT NULL,
+            city_escape TIME,
+            wild_canyon TIME,
+            prison_lane TIME
         )
         """
     )
@@ -167,23 +173,29 @@ def addSample():
         INSERT INTO {table} (
             name,
             job,
-            email
+            email,
+            city_escape,
+            wild_canyon,
+            prison_lane
         )
-        VALUES (?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
         """
     )
 
     # Sample data
     data = [
-        ("Joe", "Senior Web Developer", "joe@example.com"),
-        ("Lara", "Project Manager", "lara@example.com"),
-        ("David", "Data Analyst", "david@example.com"),
-        ("Jane", "Senior Python Developer", "jane@example.com"),
+        ("Joe", "Senior Web Developer", "joe@example.com", "2:51", "1:12", "3:15"),
+        ("Lara", "Project Manager", "lara@example.com", "3:25", "2:31", "4:27"),
+        ("David", "Data Analyst", "david@example.com", "3:41", "7:33", "5:02"),
+        ("Jane", "Senior Python Developer", "jane@example.com", "3:10", "2:43", "3:43"),
     ]
 
     # Use .addBindValue() to insert data
-    for name, job, email in data:
+    for name, job, email, city_escape, wild_canyon, prison_lane in data:
         insertDataQuery.addBindValue(name)
         insertDataQuery.addBindValue(job)
         insertDataQuery.addBindValue(email)
+        insertDataQuery.addBindValue(city_escape)
+        insertDataQuery.addBindValue(wild_canyon)
+        insertDataQuery.addBindValue(prison_lane)
         insertDataQuery.exec()
