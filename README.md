@@ -1,8 +1,6 @@
 # pyqt-database-example
 PyQt database (SQLite) basic use example
 
-This supports PySide6 as well.
-
 ## Requirements
 * PyQt5 >= 5.12
 
