@@ -1,7 +1,7 @@
-from qtpy.QtSql import QSqlTableModel, QSqlDatabase, QSqlQuery
-from qtpy.QtWidgets import QStyledItemDelegate, QMainWindow, QLabel, QTableView, QAbstractItemView, QPushButton, \
+from PyQt5.QtSql import QSqlTableModel, QSqlDatabase, QSqlQuery
+from PyQt5.QtWidgets import QStyledItemDelegate, QMainWindow, QLabel, QTableView, QAbstractItemView, QPushButton, \
     QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox, QComboBox
-from qtpy.QtCore import Qt, QSortFilterProxyModel
+from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from pyqt_instant_search_bar import InstantSearchBar
 
 
