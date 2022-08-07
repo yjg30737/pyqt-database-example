@@ -20,10 +20,12 @@ class FilterProxyModel(QSortFilterProxyModel):
         self.__searchedText = value
         self.invalidateFilter()
 
+
 class AlignDelegate(QStyledItemDelegate):
     def initStyleOption(self, option, index):
         super().initStyleOption(option, index)
         option.displayAlignment = Qt.AlignCenter
+
 
 class QtDatabaseExample(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -41,8 +43,8 @@ class QtDatabaseExample(QMainWindow):
 
         columnNames = ['ID', 'Name', 'Job', 'Email', 'City Escape', 'Wild Canyon', 'Prison Lane']
 
-        # Database table
-        # Set up the model
+        # database table
+        # set up the model
         self.__tableModel = QSqlTableModel(self)
         self.__tableModel.setTable(tableName)
         self.__tableModel.setEditStrategy(QSqlTableModel.OnFieldChange)
@@ -50,10 +52,13 @@ class QtDatabaseExample(QMainWindow):
             self.__tableModel.setHeaderData(i, Qt.Horizontal, columnNames[i])
         self.__tableModel.select()
 
+        # init the proxy model
         self.__proxyModel = FilterProxyModel()
+
+        # set the table model as source model to make it enable to feature sort and filter function
         self.__proxyModel.setSourceModel(self.__tableModel)
 
-        # Set up the view
+        # set up the view
         self.__view = QTableView()
         self.__view.setModel(self.__proxyModel)
 
@@ -77,16 +82,18 @@ class QtDatabaseExample(QMainWindow):
         delBtn = QPushButton('Delete')
         delBtn.clicked.connect(self.__delete)
 
+        # instant search bar
         searchBar = InstantSearchBar()
         searchBar.setPlaceHolder('Search...')
         searchBar.searched.connect(self.__showResult)
 
-        items = ['All'] + columnNames
-
+        # combo box to make it enable to search by each column
         self.__comboBox = QComboBox()
+        items = ['All'] + columnNames
         for i in range(len(items)):
             self.__comboBox.addItem(items[i])
 
+        # set layout
         lay = QHBoxLayout()
         lay.addWidget(lbl)
         lay.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.MinimumExpanding))
@@ -98,16 +105,17 @@ class QtDatabaseExample(QMainWindow):
         btnWidget = QWidget()
         btnWidget.setLayout(lay)
 
-        # main widget
         lay = QVBoxLayout()
         lay.addWidget(btnWidget)
         lay.addWidget(self.__view)
 
+        # main widget
         mainWidget = QWidget()
         mainWidget.setLayout(lay)
 
         self.setCentralWidget(mainWidget)
 
+        # show default result (which means "show all")
         self.__showResult('')
 
     def __add(self):
