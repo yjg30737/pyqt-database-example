@@ -14,7 +14,6 @@ Because one of QSortFilterProxyModel's function(setFilterRegularExpression) requ
 `python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
 
 ## Included Packages
-* <a href="https://github.com/spyder-ide/qtpy.git">qtpy</a>
 * <a href="https://github.com/yjg30737/pyqt-instant-search-bar.git">pyqt-instant-search-bar</a>
 
 ## Feature
