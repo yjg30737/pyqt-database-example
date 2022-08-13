@@ -83,21 +83,22 @@ class QtDatabaseExample(QMainWindow):
         delBtn.clicked.connect(self.__delete)
 
         # instant search bar
-        searchBar = InstantSearchBar()
-        searchBar.setPlaceHolder('Search...')
-        searchBar.searched.connect(self.__showResult)
+        self.__searchBar = InstantSearchBar()
+        self.__searchBar.setPlaceHolder('Search...')
+        self.__searchBar.searched.connect(self.__showResult)
 
         # combo box to make it enable to search by each column
         self.__comboBox = QComboBox()
         items = ['All'] + columnNames
         for i in range(len(items)):
             self.__comboBox.addItem(items[i])
+        self.__comboBox.currentIndexChanged.connect(self.__currentIndexChanged)
 
         # set layout
         lay = QHBoxLayout()
         lay.addWidget(lbl)
         lay.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.MinimumExpanding))
-        lay.addWidget(searchBar)
+        lay.addWidget(self.__searchBar)
         lay.addWidget(self.__comboBox)
         lay.addWidget(addBtn)
         lay.addWidget(delBtn)
@@ -136,6 +137,9 @@ class QtDatabaseExample(QMainWindow):
         self.__proxyModel.setFilterKeyColumn(self.__comboBox.currentIndex()-1)
         # regular expression can be used
         self.__proxyModel.setFilterRegularExpression(text)
+
+    def __currentIndexChanged(self, idx):
+        self.__showResult(self.__searchBar.getSearchBar().text())
 
 def createConnection():
     con = QSqlDatabase.addDatabase("QSQLITE")
