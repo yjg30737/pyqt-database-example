@@ -64,4 +64,6 @@ Let's set the column to search as "Name" and search the text "Dav".
 
 ## See Also
 
+* <a href="https://github.com/yjg30737/pyside-database-chart-example/blob/main/README.md">pyside-database-chart-example</a> - PySide6 version of this (+chart)
 * <a href="https://realpython.com/python-pyqt-database/#reader-comments">Handling SQL Databases With PyQt: The Basics</a> - I made this thanks to this article.
+
