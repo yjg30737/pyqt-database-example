@@ -10,6 +10,8 @@ But you can still look through this and help yourself as well. This works like a
 
 Because one of QSortFilterProxyModel's function(setFilterRegularExpression) requires at least 5.12. This is indeed very convinient function so you don't have to worry.
 
+Also you can use this in PyQt6 or PySide6, if you change all of "import PyQt5" in whole repo.
+
 ## Setup
 `python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
 
