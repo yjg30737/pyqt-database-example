@@ -13,9 +13,6 @@ Because one of QSortFilterProxyModel's function(setFilterRegularExpression) requ
 ## Setup
 `python -m pip install git+https://github.com/yjg30737/pyqt-database-example.git --upgrade`
 
-## Included Packages
-* <a href="https://github.com/yjg30737/pyqt-instant-search-bar.git">pyqt-instant-search-bar</a>
-
 ## Feature
 * Add/delete record (one record at a time)
 * Search the text by each column
