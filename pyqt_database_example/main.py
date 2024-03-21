@@ -1,8 +1,9 @@
+from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtSql import QSqlTableModel, QSqlDatabase, QSqlQuery
 from PyQt5.QtWidgets import QStyledItemDelegate, QMainWindow, QLabel, QTableView, QAbstractItemView, QPushButton, \
-    QHBoxLayout, QSpacerItem, QSizePolicy, QWidget, QVBoxLayout, QMessageBox, QComboBox
-from PyQt5.QtCore import Qt, QSortFilterProxyModel
-from pyqt_instant_search_bar import InstantSearchBar
+    QHBoxLayout, QWidget, QVBoxLayout, QMessageBox, QComboBox
+
+from pyqt_database_example.instantSearchBar import InstantSearchBar
 
 
 # for search feature
@@ -24,7 +25,7 @@ class FilterProxyModel(QSortFilterProxyModel):
 class AlignDelegate(QStyledItemDelegate):
     def initStyleOption(self, option, index):
         super().initStyleOption(option, index)
-        option.displayAlignment = Qt.AlignCenter
+        option.displayAlignment = Qt.AlignmentFlag.AlignCenter
 
 
 class QtDatabaseExample(QMainWindow):
@@ -47,9 +48,9 @@ class QtDatabaseExample(QMainWindow):
         # set up the model
         self.__tableModel = QSqlTableModel(self)
         self.__tableModel.setTable(tableName)
-        self.__tableModel.setEditStrategy(QSqlTableModel.OnFieldChange)
+        self.__tableModel.setEditStrategy(QSqlTableModel.EditStrategy.OnFieldChange)
         for i in range(len(columnNames)):
-            self.__tableModel.setHeaderData(i, Qt.Horizontal, columnNames[i])
+            self.__tableModel.setHeaderData(i, Qt.Orientation.Horizontal, columnNames[i])
         self.__tableModel.select()
 
         # init the proxy model
@@ -68,13 +69,13 @@ class QtDatabaseExample(QMainWindow):
             self.__view.setItemDelegateForColumn(i, delegate)
 
         # set selection/resize policy
-        self.__view.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.__view.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.__view.resizeColumnsToContents()
-        self.__view.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.__view.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
 
         # sort (ascending order by default)
         self.__view.setSortingEnabled(True)
-        self.__view.sortByColumn(0, Qt.AscendingOrder)
+        self.__view.sortByColumn(0, Qt.SortOrder.AscendingOrder)
 
         # add/delete buttons
         addBtn = QPushButton('Add')
@@ -97,7 +98,6 @@ class QtDatabaseExample(QMainWindow):
         # set layout
         lay = QHBoxLayout()
         lay.addWidget(lbl)
-        lay.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.MinimumExpanding))
         lay.addWidget(self.__searchBar)
         lay.addWidget(self.__comboBox)
         lay.addWidget(addBtn)

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyqt-database-example',
-    version='0.0.3',
+    version='0.0.4',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
@@ -11,6 +11,5 @@ setup(
     url='https://github.com/yjg30737/pyqt-database-example.git',
     install_requires=[
         'PyQt5>=5.12',
-        'pyqt-instant-search-bar'
     ]
 )
